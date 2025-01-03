@@ -38,4 +38,20 @@ const getTask=async(req,res)=>{
         return res.status(StatusCodes.NOT_FOUND).json(errorResponse)
     }
 }
-module.exports = {createTask,getTasks,getTask };
+const updateTask=async(req,res)=>{
+    const taskID=req.params.id
+    try {
+        const task=Task.findById(taskID)
+        if(!task){
+            errorResponse.error="Cannot update task given the id"
+            return res.status(StatusCodes.NOT_FOUND).json(errorResponse)
+        }
+        const updatedTask=await Task.findByIdAndUpdate(taskID,req.body,{new:true})
+        successResponse.data=updatedTask
+        return res.status(StatusCodes.OK).json(successResponse)
+    } catch (error) {
+        errorResponse.error="Cannot update the task due to internal server error"
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(errorResponse)
+    }
+}
+module.exports = {createTask,getTasks,getTask,updateTask};

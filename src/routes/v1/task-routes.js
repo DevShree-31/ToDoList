@@ -6,4 +6,5 @@ const taskRouter=express.Router();
 taskRouter.post('/',authenticate,TaskController.createTask)
 taskRouter.get('/',TaskController.getTasks)
 taskRouter.get('/:id',TaskController.getTask)
+taskRouter.put('/:id',authenticate,TaskController.updateTask)
 module.exports=taskRouter

@@ -3,7 +3,7 @@ const {StatusCodes}=require('http-status-codes')
 const User=require('../models/user.js')
 const bcrypt=require('bcrypt')
 const { sign } = require('jsonwebtoken')
-const { JWTSECRET } = require('../config/server-config.js')
+const { ServerConfig } = require('../config/index.js')
 const createUser=async(req,res)=>{
     const {name,email,password}=req.body
     //validation
@@ -67,7 +67,7 @@ const loginUser=async(req,res)=>{
     
     //Token signature
     try {
-        const token=sign({sub:user._id},JWTSECRET,{expiresIn:'7d'})
+        const token=sign({sub:user._id},ServerConfig.JWTSECRET,{expiresIn:'7d'})
         successResponse.data=token;
         res.status(StatusCodes.CREATED).json(successResponse);
     } catch (error) {

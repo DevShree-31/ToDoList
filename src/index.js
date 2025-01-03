@@ -3,7 +3,6 @@ const { ServerConfig } = require("./config");
 const apiRoutes = require("./routes");
 const serverConfig = require("./config/server-config");
 const { default: mongoose } = require("mongoose");
-const Task = require("./models/task");
 
 const app = express();
 app.use(express.json());

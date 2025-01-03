@@ -27,4 +27,15 @@ const getTasks=async(req,res)=>{
     }
 
 }
-module.exports = {createTask,getTasks};
+const getTask=async(req,res)=>{
+    try {
+        const taskID=req.params.id
+        const task=await Task.findById(taskID)
+        successResponse.data=task
+        return res.status(StatusCodes.OK).json(successResponse)
+    } catch (error) {
+        errorResponse.error="Cannot retrieve task given the id"
+        return res.status(StatusCodes.NOT_FOUND).json(errorResponse)
+    }
+}
+module.exports = {createTask,getTasks,getTask };

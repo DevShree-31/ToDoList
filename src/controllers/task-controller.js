@@ -1,10 +1,5 @@
 const { StatusCodes } = require("http-status-codes");
-const {successResponse}=require('../utils/index.js')
-const info = (req, res) => {
-  successResponse.data="TO DO List API is Live"
-  return res.status(StatusCodes.OK).json(successResponse);
-};
+const {successResponse,errorResponse}=require('../utils/index.js')
 
-module.exports = {
-  info,
-};
+
+module.exports = {};
